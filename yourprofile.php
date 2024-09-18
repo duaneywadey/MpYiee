@@ -42,8 +42,8 @@
 								<div class="row">
 									<div class="col-md-6"><h2>Your Details</h2></div>
 									<div class="col-md-6 float-end">
-										<button class="btn btn-primary"> <i class="fa fa-pencil" aria-hidden="true"></i>Music Taste</button>
-										<button class="btn btn-primary">
+										<button class="btn btn-primary" data-toggle="modal" data-target="#musicTasteModal"> <i class="fa fa-pencil" aria-hidden="true"></i>Music Taste</button>
+										<button class="btn btn-primary" data-toggle="modal" data-target="#socialMediaAccountsModal">
 											<i class="fa fa-pencil" aria-hidden="true"></i>Social Media Accounts
 										</button>
 									</div>
@@ -245,6 +245,54 @@
 			</div>
 		</div>
 	</div>
+		<!-- Modal -->
+	<div class="modal fade" id="musicTasteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Add a Music Taste</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="form-group">
+	      		<label for="musicTaste">Add new music</label>
+	      		<input type="text" class="form-control">
+	      	</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="socialMediaAccountsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Add Social Media Accounts</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="form-group">
+	      		<label for="musicTaste">Add social media accounts</label>
+	      		<input type="text" class="form-control">
+	      	</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
 	<script>
 		let modalId = $('#image-gallery');
 
