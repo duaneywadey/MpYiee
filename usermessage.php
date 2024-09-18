@@ -1,5 +1,3 @@
-<?php echo "string"; ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +31,17 @@
 						<h2>Messages</h2>
 				    </div>
 				    <div class="card-body">
-				    	<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam possimus accusantium totam velit, iste cumque facere impedit aliquid quisquam odio, non, sapiente vel tenetur officiis ea, labore nisi magnam omnis.</p>
+				    	<div class="row mt-2">
+				    		<div class="col-md-12">
+				    			<div class="card float-right">
+				    				<div class="card-body">
+				    					<h4 class="text-danger">Ivan Duane</h4>
+				    					<small><i>September 18, 2024 7:09 AM</i></small>
+						    			<p class="mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt quia magnam eum velit ex veniam, assumenda, molestiae aspernatur quod, porro vel debitis nisi possimus? Voluptatem minima, dolor laborum recusandae sapiente.</p>
+				    				</div>
+				    			</div>
+				    		</div>
+				    	</div>
 				    </div>
 				</div>
 			</div>
