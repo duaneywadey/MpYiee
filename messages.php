@@ -26,7 +26,7 @@
 	<div class="container">
 		<div class="row mt-4">
 			<div class="col-md-12">
-				<div class="card">
+				<div class="card shadow p-3 mb-5 bg-white rounded">
 					<div class="card-header">
 						<h2>Messages</h2>
 				    </div>
