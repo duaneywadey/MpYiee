@@ -58,6 +58,23 @@
 							</div>
 						</div>
 						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="username">Gender</label>
+									<select name="gender" id="cars" class="form-control">
+									  <option value="volvo">Male</option>
+									  <option value="saab">Female</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="username">Date of Birth</label>
+									<input type="date" class="form-control">
+								</div>
+							</div>
+						</div>
+						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="username">First Name</label>

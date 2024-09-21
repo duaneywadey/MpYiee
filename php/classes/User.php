@@ -11,6 +11,8 @@ class User {
 		}
 	}
 
+	
+
 	public function showAllUsers() {
 		try {
 			$sql = "SELECT * FROM users";
