@@ -1,3 +1,4 @@
+<?php require_once 'php/core.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +28,7 @@
 			<div class="col-md-12 py-5">
 				<div class="card shadow p-3 mb-5 bg-white rounded">
 					<div class="card-header">
-						<h1><img src="https://www.svgrepo.com/show/429525/audio-file-mp3.svg" alt="" style="width: 40px; height: 40px; margin-right: 10px;">Welcome, <?php echo $_SESSION['username']; ?>List Down Your Music Taste!</h1>
+						<h1><img src="https://www.svgrepo.com/show/429525/audio-file-mp3.svg" alt="" style="width: 40px; height: 40px; margin-right: 10px;">Welcome, <?php echo $_SESSION['username']; ?>. List Down Your Music Taste!</h1>
 					</div>
 					<div class="card-body">
 						<form action="php/music_interests.php" method="POST">
@@ -35,7 +36,7 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<label for="">What bands do you like listening to? <i>Separate them by commas</i></label>
-										<textarea name="" id="" class="form-control"></textarea>
+										<textarea name="musicInterestsInput" id="" class="form-control"></textarea>
 									</div>
 									<div class="form-group">
 										<input type="submit" class="btn btn-primary float-right" name="addNewMusicInterestBtn">

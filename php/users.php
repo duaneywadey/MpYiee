@@ -19,11 +19,7 @@ if (isset($_POST['registerUserBtn'])) {
 		$query = $userObj->insertNewUser($username, $password, $date_of_birth, $first_name, $last_name, $gender, $location);
 
 		if ($query) {
-			header("Location: ../login.php");
-		}
-
-		else {
-			echo "Something went wrong!";
+			header("Location: ../music-you-like.php");
 		}
 		
 	}

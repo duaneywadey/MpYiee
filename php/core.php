@@ -15,5 +15,6 @@ spl_autoload_register(function($className) {
 });
 
 $userObj = new User($pdo);
+$musicObj = new Music($pdo);
 
 

@@ -27,19 +27,44 @@ class User {
 		
 		try {
 			$sql = "SELECT * FROM mpyie_users WHERE username = ?";
-			$stmt = $this->pdo->prepare($sql);
-			$stmt->execute([$username]);
+			$selectStmt = $this->pdo->prepare($sql);
+			$selectStmt->execute([$username]);
 
-			if ($stmt->rowCount() == 0) {
+			if ($selectStmt->rowCount() == 0) {
 
 				$sql = "INSERT INTO mpyie_users (username, password, date_of_birth, first_name, last_name, gender, location) VALUES(?,?,?,?,?,?,?)";
 
-				$stmt = $this->pdo->prepare($sql);
+				$insertStmt = $this->pdo->prepare($sql);
 
-				return $stmt->execute([$username, $password, $date_of_birth, $first_name, $last_name, $gender, $location]);	
+				$insertNewUserQuery = $insertStmt->execute([$username, $password, $date_of_birth, $first_name, $last_name, $gender, $location]);
+
+				if ($insertNewUserQuery) {
+
+					$sql = "SELECT * FROM mpyie_users WHERE username = ?";
+					$getUserQuery = $this->pdo->prepare($sql);
+
+					if ($getUserQuery->execute([$username])) {
+
+						$userInfoArray = $getUserQuery->fetch();
+
+						$user_id = $userInfoArray['user_id'];
+						$username = $userInfoArray['username'];
+
+						$_SESSION['user_id'] = $user_id;
+						$_SESSION['username'] = $username;
+						return true;
+
+					}
+					else {
+						echo "User not retrieved";
+					}
+				}
+				else {
+					echo "User not inserted";
+				}	
 			}
 			else {
-				return false;
+				echo "User already exists!";;
 			}
 		} 
 		catch (PDOException $e) {

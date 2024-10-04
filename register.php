@@ -103,7 +103,7 @@
 											<textarea name="" id="" class="form-control"></textarea>
 										</div>
 										<div class="form-group">
-											<input type="submit" class="btn btn-primary float-right">
+											<input type="submit" class="btn btn-primary float-right" name="registerUserBtn">
 										</div>
 									</div>
 								</div>
