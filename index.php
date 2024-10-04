@@ -1,4 +1,13 @@
-<?php require_once 'php/core.php'; ?>
+<?php 
+
+require_once 'php/core.php'; 
+
+if (!isset($_SESSION['username'])) {
+	header("Location: login.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +35,9 @@
 	<?php require_once 'includes/navbar.php'; ?>
 	<div class="container">
 		<div class="row justify-content-center">
+			<?php if (isset($_SESSION['username'])) { ?>
+			<h1>Hello there welcome <?php echo $_SESSION['username']; ?></h1>
+			<?php } ?>
 			<?php $showAllUsers = $userObj->showAllUsers(); ?>
 			<?php foreach ($showAllUsers as $col) { ?>
 			<div class="col-md-12 mt-4">

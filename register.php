@@ -64,8 +64,8 @@
 										<div class="form-group">
 											<label for="username">Gender</label>
 											<select name="gender" class="form-control">
-											  <option value="volvo">Male</option>
-											  <option value="saab">Female</option>
+											  <option value="Male">Male</option>
+											  <option value="Female">Female</option>
 											</select>
 										</div>
 									</div>
@@ -99,23 +99,11 @@
 								<div class="row">
 									<div class="col-md-12">
 										<div class="form-group">
-											<label for="">What bands do you like listening to? <i>Separate them by commas</i></label>
-											<textarea name="" id="" class="form-control"></textarea>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-12">
-										<div class="form-group">
 											<label for="">Tell something about yourself!</label>
 											<textarea name="" id="" class="form-control"></textarea>
 										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col">
 										<div class="form-group">
-											<input type="submit" class="btn btn-primary float-right" value="Save" name="registerUserBtn">
+											<input type="submit" class="btn btn-primary float-right">
 										</div>
 									</div>
 								</div>
