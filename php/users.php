@@ -53,4 +53,9 @@ if (isset($_GET['logoutAUser'])) {
 }
 
 
+
+if (isset($_POST['saveUpdatedUserBtn'])) {
+	echo $_POST['firstName'] . $_POST['lastName'];
+}
+
 ?>

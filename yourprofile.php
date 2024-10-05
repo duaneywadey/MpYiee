@@ -52,7 +52,7 @@
 								</div>
 								<hr>
 								<?php $getUserByID = $userObj->getUserByID($_SESSION['user_id']);?>
-								<form action="#">
+								<div class="updateUserForm">
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
@@ -89,11 +89,11 @@
 												</textarea>
 											</div>
 											<div class="form-group">
-												<input type="submit" value="Save" class="saveUserBtn btn btn-primary float-right">
+												<button class="updateUserBtn btn btn-primary float-right">Save User</button>
 											</div>
 										</div>
 									</div>
-								</form>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -301,11 +301,29 @@
 	</div>
 
 	<script>
-		$('.saveUserBtn').on('click', function () {
-			var firstName = $('.firstName').val();
-			var lastName = $('.lastName').val();
-			var age = $('.age').val();
-			var descriptionInput = $('.descriptionInput').text();
+		$(document).ready(function () {
+			$('.updateUserBtn').on('click', function () {
+				var firstName = $('.firstName').val();
+				var lastName = $('.lastName').val();
+				var age = $('.age').val();
+				var descriptionInput = $('.descriptionInput').text();
+
+				$.ajax({
+					url: "php/users.php",
+					type: "POST",
+					dataType:"text",
+					data: {
+						saveUpdatedUserBtn:1,
+						firstName:firstName,
+						lastName:lastName,
+						age:age,
+						descriptionInput:descriptionInput
+					},
+					success: function (data) {
+						alert(data);
+					}
+				});
+			});
 		})
 	</script>
 	<?php require_once 'includes/footer.php'; ?>
