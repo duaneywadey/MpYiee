@@ -11,11 +11,11 @@ class User {
 		}
 	}
 
-	public function showAllUsers() {
+	public function showAllUsers($user_id) {
 		try {
-			$sql = "SELECT * FROM mpyie_users";
+			$sql = "SELECT * FROM mpyie_users WHERE NOT user_id = ?";
 			$stmt = $this->pdo->prepare($sql);
-			$stmt->execute();
+			$stmt->execute([$user_id]);
 			return $stmt->fetchAll();
 		} 
 		catch (PDOException $e) {
@@ -23,7 +23,7 @@ class User {
 		}
 	}
 
-	public function insertNewUser($username, $password, $date_of_birth, $first_name, $last_name, $gender, $location) {
+	public function insertNewUser($username, $password, $date_of_birth, $first_name, $last_name, $gender, $location, $description) {
 		
 		try {
 			$sql = "SELECT * FROM mpyie_users WHERE username = ?";
@@ -32,11 +32,11 @@ class User {
 
 			if ($selectStmt->rowCount() == 0) {
 
-				$sql = "INSERT INTO mpyie_users (username, password, date_of_birth, first_name, last_name, gender, location) VALUES(?,?,?,?,?,?,?)";
+				$sql = "INSERT INTO mpyie_users (username, password, date_of_birth, first_name, last_name, gender, location, description) VALUES(?,?,?,?,?,?,?,?)";
 
 				$insertStmt = $this->pdo->prepare($sql);
 
-				$insertNewUserQuery = $insertStmt->execute([$username, $password, $date_of_birth, $first_name, $last_name, $gender, $location]);
+				$insertNewUserQuery = $insertStmt->execute([$username, $password, $date_of_birth, $first_name, $last_name, $gender, $location, $description]);
 
 				if ($insertNewUserQuery) {
 
@@ -112,6 +112,17 @@ class User {
 			$stmt = $this->pdo->prepare($sql);
 			$stmt->execute([$user_id]);
 			return $stmt->fetch();
+		}
+		catch (PDOException $e) {
+			die($e->getMessage());
+		}
+	}
+
+	public function updateUserByID($user_id, $first_name, $last_name, $gender, $location, $description) {
+		try {
+			$sql = "UPDATE mpyie_users SET first_name = ?, last_name = ?, gender = ?, location = ?, description = ?";
+			$stmt = $this->pdo->prepare($sql);
+			return $stmt->execute([$first_name, $last_name, $gender, $location, $description]);
 		}
 		catch (PDOException $e) {
 			die($e->getMessage());

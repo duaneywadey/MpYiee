@@ -38,7 +38,7 @@ if (!isset($_SESSION['username'])) {
 			<?php if (isset($_SESSION['username'])) { ?>
 			<h1>Hello there welcome <?php echo $_SESSION['username']; ?></h1>
 			<?php } ?>
-			<?php $showAllUsers = $userObj->showAllUsers(); ?>
+			<?php $showAllUsers = $userObj->showAllUsers($_SESSION['user_id']); ?>
 			<?php foreach ($showAllUsers as $col) { ?>
 			<div class="col-md-12 mt-4">
 				<div class="card mt-4 shadow p-3 mb-5 bg-white rounded">

@@ -1,3 +1,4 @@
+<?php require_once 'php/core.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,12 +34,13 @@
 					<div class="card-body">
 						<div class="row">
 							<div class="col-md-5">
-								<img src="https://images.unsplash.com/photo-1725561754846-3c5972698e17?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="..." class=" img-thumbnail">
+								<img src="https://plus.unsplash.com/premium_photo-1666299357356-db1ed4a6d50b?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="..." class=" img-thumbnail">
 								<hr>
 								<h1>Ivan Duane</h1>
 								<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit, molestias, magni autem placeat quod quo? Officiis, quisquam, eius a quam fugiat voluptates, ipsum maxime recusandae alias temporibus perspiciatis sit quasi?</p>
 							</div>
 							<div class="col-md-7">
+
 								<div class="row">
 									<div class="col-md-6"><h2>Your Details</h2></div>
 									<div class="col-md-6 float-end">
@@ -49,18 +51,19 @@
 									</div>
 								</div>
 								<hr>
+								<?php $getUserByID = $userObj->getUserByID($_SESSION['user_id']);?>
 								<form action="#">
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
 												<label for="name">First Name</label>
-												<input type="text" class="form-control">
+												<input type="text" class="firstName form-control" value="<?php echo $getUserByID['first_name']; ?>">
 											</div>	
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label for="name">Last Name</label>
-												<input type="text" class="form-control">
+												<input type="text" class="lastName form-control" value="<?php echo $getUserByID['last_name']; ?>">
 											</div>	
 										</div>
 									</div>
@@ -68,13 +71,13 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label for="name">Age</label>
-												<input type="text" class="form-control">
+												<input type="text" class="age form-control" value="<?php echo $getUserByID['date_of_birth']; ?>">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label for="name">Location</label>
-												<input type="text" class="form-control">
+												<input type="text" class="location form-control" value="<?php echo $getUserByID['location']; ?>">
 											</div>
 										</div>
 									</div>
@@ -82,7 +85,11 @@
 										<div class="col-md-12">
 											<div class="form-group">
 												<label for="name">Description</label>
-												<textarea name="" id="" class="form-control"></textarea>
+												<textarea name="" id="" class="descriptionInput form-control"><?php echo $getUserByID['description']; ?>
+												</textarea>
+											</div>
+											<div class="form-group">
+												<input type="submit" value="Save" class="saveUserBtn btn btn-primary float-right">
 											</div>
 										</div>
 									</div>
@@ -294,98 +301,12 @@
 	</div>
 
 	<script>
-		let modalId = $('#image-gallery');
-
-		$(document)
-		  .ready(function () {
-
-		    loadGallery(true, 'a.thumbnail');
-
-		    //This function disables buttons when needed
-		    function disableButtons(counter_max, counter_current) {
-		      $('#show-previous-image, #show-next-image')
-		        .show();
-		      if (counter_max === counter_current) {
-		        $('#show-next-image')
-		          .hide();
-		      } else if (counter_current === 1) {
-		        $('#show-previous-image')
-		          .hide();
-		      }
-		    }
-
-		    /**
-		     *
-		     * @param setIDs        Sets IDs when DOM is loaded. If using a PHP counter, set to false.
-		     * @param setClickAttr  Sets the attribute for the click handler.
-		     */
-
-		    function loadGallery(setIDs, setClickAttr) {
-		      let current_image,
-		        selector,
-		        counter = 0;
-
-		      $('#show-next-image, #show-previous-image')
-		        .click(function () {
-		          if ($(this)
-		            .attr('id') === 'show-previous-image') {
-		            current_image--;
-		          } else {
-		            current_image++;
-		          }
-
-		          selector = $('[data-image-id="' + current_image + '"]');
-		          updateGallery(selector);
-		        });
-
-		      function updateGallery(selector) {
-		        let $sel = selector;
-		        current_image = $sel.data('image-id');
-		        $('#image-gallery-title')
-		          .text($sel.data('title'));
-		        $('#image-gallery-image')
-		          .attr('src', $sel.data('image'));
-		        disableButtons(counter, $sel.data('image-id'));
-		      }
-
-		      if (setIDs == true) {
-		        $('[data-image-id]')
-		          .each(function () {
-		            counter++;
-		            $(this)
-		              .attr('data-image-id', counter);
-		          });
-		      }
-		      $(setClickAttr)
-		        .on('click', function () {
-		          updateGallery($(this));
-		        });
-		    }
-		  });
-
-		// build key actions
-		$(document)
-		  .keydown(function (e) {
-		    switch (e.which) {
-		      case 37: // left
-		        if ((modalId.data('bs.modal') || {})._isShown && $('#show-previous-image').is(":visible")) {
-		          $('#show-previous-image')
-		            .click();
-		        }
-		        break;
-
-		      case 39: // right
-		        if ((modalId.data('bs.modal') || {})._isShown && $('#show-next-image').is(":visible")) {
-		          $('#show-next-image')
-		            .click();
-		        }
-		        break;
-
-		      default:
-		        return; // exit this handler for other keys
-		    }
-		    e.preventDefault(); // prevent the default action (scroll / move caret)
-		  });
+		$('.saveUserBtn').on('click', function () {
+			var firstName = $('.firstName').val();
+			var lastName = $('.lastName').val();
+			var age = $('.age').val();
+			var descriptionInput = $('.descriptionInput').text();
+		})
 	</script>
 	<?php require_once 'includes/footer.php'; ?>
 </body>

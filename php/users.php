@@ -13,10 +13,11 @@ if (isset($_POST['registerUserBtn'])) {
 	$first_name = trim($_POST['first_name']);
 	$last_name = trim($_POST['last_name']);
 	$location = trim($_POST['location']);
+	$description = trim($_POST['description']);
 
 	if ($password == $confirmPassword) {
 
-		$query = $userObj->insertNewUser($username, $password, $date_of_birth, $first_name, $last_name, $gender, $location);
+		$query = $userObj->insertNewUser($username, $password, $date_of_birth, $first_name, $last_name, $gender, $location,$description);
 
 		if ($query) {
 			header("Location: ../music-you-like.php");
