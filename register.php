@@ -1,3 +1,4 @@
+<?php require_once 'php/core.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,6 +37,23 @@
 									<div class="col-md-12">
 										<a href="login.php">Return to home</a>
 									</div>
+
+									<?php  
+									if (isset($_SESSION['status']) && isset($_SESSION['message'])) {
+										if ($_SESSION['status'] == "404") {
+											echo 
+											"<div class='col-md-12 mt-2'>
+												<div class='alert alert-danger' role='alert'>
+													{$_SESSION['message']}
+												</div>
+											</div>";
+
+										}
+									}
+									unset($_SESSION['status']);
+									unset($_SESSION['message']);
+									?>
+
 								</div>
 								<div class="row">
 									<div class="col-md-12">
@@ -100,7 +118,7 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											<label for="">Tell something about yourself!</label>
-											<textarea name="" id="" class="form-control"></textarea>
+											<textarea name="description" id="" class="form-control"></textarea>
 										</div>
 										<div class="form-group">
 											<input type="submit" class="btn btn-primary float-right" name="registerUserBtn">

@@ -26,6 +26,8 @@ class User {
 	public function insertNewUser($username, $password, $date_of_birth, $first_name, $last_name, $gender, $location, $description) {
 		
 		try {
+
+			$response = array();
 			$sql = "SELECT * FROM mpyie_users WHERE username = ?";
 			$selectStmt = $this->pdo->prepare($sql);
 			$selectStmt->execute([$username]);
@@ -47,25 +49,35 @@ class User {
 
 						$userInfoArray = $getUserQuery->fetch();
 
-						$user_id = $userInfoArray['user_id'];
-						$username = $userInfoArray['username'];
-
-						$_SESSION['user_id'] = $user_id;
-						$_SESSION['username'] = $username;
-						return true;
-
+						$response = array(
+							"status" => "200",
+							"message" => "Successfully registered!",
+							"userInfoArray" => $userInfoArray
+						);
 					}
 					else {
-						echo "User not retrieved";
+						$response = array(
+							"status" => "404",
+							"message" => "Can't find user from the database!"
+						);
 					}
 				}
 				else {
-					echo "User not inserted";
+					$response = array(
+						"status" => "404",
+						"message" => "Can't find user from the database!"
+					);
 				}	
 			}
 			else {
-				echo "User already exists!";;
+				$response = array(
+					"status" => "404",
+					"message" => "User already exists from the database"
+				);
 			}
+
+			return $response;
+
 		} 
 		catch (PDOException $e) {
 			die($e->getMessage());
@@ -74,30 +86,14 @@ class User {
 
 	public function loginUser($username, $password) {
 		try {
+
 			$sql = "SELECT * FROM mpyie_users WHERE username = ?";
 			$stmt = $this->pdo->prepare($sql);
 			$stmt->execute([$username]);
 
 			if ($stmt->rowCount() > 0) {
-
 				$userInfoRow = $stmt->fetch();
-
-				// Get individual values
-				$user_id = $userInfoRow['user_id'];
-				$username = $userInfoRow['username'];
-				$passwordFromDB = $userInfoRow['password'];
-
-				if ($password == $passwordFromDB) {
-					$_SESSION['user_id'] = $user_id;
-					$_SESSION['username'] = $username;
-					return true;
-				}
-				else {
-					echo "User was found but incorrect password";
-				}
-			}
-			else {
-				echo "User not found";
+				return $userInfoRow;
 			}
 		}
 
