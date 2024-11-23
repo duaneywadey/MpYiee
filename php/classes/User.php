@@ -114,16 +114,17 @@ class User {
 		}
 	}
 
-	public function updateUserByID($user_id, $first_name, $last_name, $gender, $location, $description) {
+	public function updateUserByID($user_id, $first_name, $last_name, $location) {
 		try {
-			$sql = "UPDATE mpyie_users SET first_name = ?, last_name = ?, gender = ?, location = ?, description = ?";
+			$sql = "UPDATE mpyie_users SET first_name = ?, last_name = ?, location = ? WHERE user_id = ?";
 			$stmt = $this->pdo->prepare($sql);
-			return $stmt->execute([$first_name, $last_name, $gender, $location, $description]);
+			return $stmt->execute([$first_name, $last_name, $location, $user_id]);
 		}
 		catch (PDOException $e) {
 			die($e->getMessage());
 		}
 	}
+
 }
 
 

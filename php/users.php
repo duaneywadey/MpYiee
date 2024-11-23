@@ -19,14 +19,11 @@ if (isset($_POST['registerUserBtn'])) {
 
 		if ($password == $confirmPassword) {
 
-		$query = $userObj->insertNewUser($username, password_hash($password, PASSWORD_DEFAULT), $date_of_birth, $first_name, $last_name, $gender, $location, $description);
+			$query = $userObj->insertNewUser($username, password_hash($password, PASSWORD_DEFAULT), $date_of_birth, $first_name, $last_name, $gender, $location, $description);
 
-		echo "<pre>";
-		print_r($query);
-		echo "<pre>";
 
 			if ($query['status'] == "200") {
-				$_SESSION['user_id'] = $query['userInfoArray']['username'];
+				$_SESSION['user_id'] = $query['userInfoArray']['user_id'];
 				$_SESSION['username'] = $query['userInfoArray']['username'];
 				header("Location: ../music-you-like.php");
 			}
@@ -83,7 +80,15 @@ if (isset($_GET['logoutAUser'])) {
 
 
 if (isset($_POST['saveUpdatedUserBtn'])) {
-	echo $_POST['firstName'] . $_POST['lastName'];
+	$firstName = $_POST['firstName'];
+	$lastName = $_POST['lastName'];
+	$location = $_POST['location'];
+	$updateUser = $userObj->updateUserByID($_SESSION['user_id'], $firstName, $lastName, $location);
+
+	if ($updateUser) {
+		echo true;
+	}
+
 }
 
 ?>

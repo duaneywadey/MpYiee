@@ -1,3 +1,4 @@
+<?php require_once 'php/core.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,6 +38,7 @@
 							</div>
 						</div>
 					</div>
+					<?php $userInfoArray = $userObj->getUserByID($_GET['user_id']); ?>
 					<div class="card-body">
 						<div class="row">
 							<div class="col-md-5">
@@ -47,19 +49,29 @@
 									</div>
 									<div class="col-md-6">
 						        		<label for="fname">First Name</label>
-						        		<div class="p-3 mb-2 bg-light text-dark">Ivan</div>
+						        		<div class="p-3 mb-2 bg-light text-dark"><?php echo $userInfoArray['first_name']; ?></div>
 						        	</div>
 						        	<div class="col-md-6">
 						        		<label for="fname">Last Name</label>
-						        		<div class="p-3 mb-2 bg-light text-dark">Duane</div>
+						        		<div class="p-3 mb-2 bg-light text-dark"><?php echo $userInfoArray['last_name']; ?></div>
 						        	</div>
 						        	<div class="col-md-12">
 						        		<label for="fname">Age</label>
-						        		<div class="p-3 mb-2 bg-light text-dark">24</div>
+						        		<div class="p-3 mb-2 bg-light text-dark"><?php echo $userInfoArray['date_of_birth']; ?></div>
 						        	</div>
 						        	<div class="col-md-12">
 						        		<label for="fname">Location</label>
-						        		<div class="p-3 mb-2 bg-light text-dark">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla sapiente beatae optio quasi necessitatibus, veniam recusandae quis distinctio, deleniti placeat delectus. Esse amet suscipit cumque dignissimos, at, numquam eligendi nostrum.</div>
+						        		<div class="p-3 mb-2 bg-light text-dark"><?php echo $userInfoArray['location']; ?></div>
+						        	</div>
+						        	<div class="col-md-12">
+						        		<label for="fname">Music Tastes</label>
+						        		<div class="p-3 mb-2 bg-light text-dark"><?php echo $userInfoArray['location']; ?></div>
+						        	</div>
+						        	<div class="col-md-12">
+						        		<label for="fname">Social Media Accounts</label>
+						        		<ul>
+						        			<li><a href="https://getbootstrap.com/docs/4.0/components/forms/">https://getbootstrap.com/docs/4.0/components/forms/</a></li>
+						        		</ul>
 						        	</div>
 						        </div>
 								<hr>
@@ -68,125 +80,23 @@
 								<div class="container">
 									<div class="row">
 										<div class="col-md-12">
-							        		<h1>Who is Ivan Duane?</h1>
-											<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit, molestias, magni autem placeat quod quo? Officiis, quisquam, eius a quam fugiat voluptates, ipsum maxime recusandae alias temporibus perspiciatis sit quasi?</p>
+							        		<h1>Who is <?php echo $userInfoArray['first_name'] . "?"?></h1>
+											<p><?php echo $userInfoArray['description']; ?></p>
 							        	</div>
 									</div>
 									<div class="row">
+										<?php $getAllImagesByUserID = $photoObj->getAllImagesByUserID($_GET['user_id']); ?>
+										<?php foreach ($getAllImagesByUserID as $row) { ?>
 							            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
 							                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
-							                   data-image="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+							                   data-image="images/<?php echo $row['photo_name']; ?>"
 							                   data-target="#image-gallery">
 							                    <img class="img-thumbnail"
-							                         src="https://images.unsplash.com/photo-1725610588150-c4cd8b88affd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+							                         src="images/<?php echo $row['photo_name']; ?>"
 							                         alt="Another alt text">
 							                </a>
 							            </div>
-							            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-							                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
-							                   data-image="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                   data-target="#image-gallery">
-							                    <img class="img-thumbnail"
-							                         src="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                         alt="Another alt text">
-							                </a>
-							            </div>
-
-							            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-							                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
-							                   data-image="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                   data-target="#image-gallery">
-							                    <img class="img-thumbnail"
-							                         src="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                         alt="Another alt text">
-							                </a>
-							            </div>
-							            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-							                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Test1"
-							                   data-image="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                   data-target="#image-gallery">
-							                    <img class="img-thumbnail"
-							                         src="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                         alt="Another alt text">
-							                </a>
-							            </div>
-							            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-							                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice"
-							                   data-image="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                   data-target="#image-gallery">
-							                    <img class="img-thumbnail"
-							                         src="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                         alt="Another alt text">
-							                </a>
-							            </div>
-
-							            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-							                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice"
-							                   data-image="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                   data-target="#image-gallery">
-							                    <img class="img-thumbnail"
-							                         src="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                         alt="Another alt text">
-							                </a>
-							            </div>
-							            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-							                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice"
-							                   data-image="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                   data-target="#image-gallery">
-							                    <img class="img-thumbnail"
-							                         src="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                         alt="Another alt text">
-							                </a>
-							            </div>
-							            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-							                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice"
-							                   data-image="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                   data-target="#image-gallery">
-							                    <img class="img-thumbnail"
-							                         src="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                         alt="Another alt text">
-							                </a>
-							            </div>
-
-
-
-							            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-							                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice"
-							                   data-image="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                   data-target="#image-gallery">
-							                    <img class="img-thumbnail"
-							                         src="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                         alt="Another alt text">
-							                </a>
-							            </div>
-							            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-							                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice"
-							                   data-image="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                   data-target="#image-gallery">
-							                    <img class="img-thumbnail"
-							                         src="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                         alt="Another alt text">
-							                </a>
-							            </div>
-							            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-							                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice"
-							                   data-image="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                   data-target="#image-gallery">
-							                    <img class="img-thumbnail"
-							                         src="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                         alt="Another alt text">
-							                </a>
-							            </div>
-							            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-							                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice"
-							                   data-image="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                   data-target="#image-gallery">
-							                    <img class="img-thumbnail"
-							                         src="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-							                         alt="Another alt text">
-							                </a>
-							            </div>
-							        </div>
+							        	<?php } ?>
 							        <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 							            <div class="modal-dialog modal-lg">
 							                <div class="modal-content">
@@ -216,100 +126,6 @@
 			</div>
 		</div>
 	</div>
-	<script>
-		let modalId = $('#image-gallery');
-
-		$(document)
-		  .ready(function () {
-
-		    loadGallery(true, 'a.thumbnail');
-
-		    //This function disables buttons when needed
-		    function disableButtons(counter_max, counter_current) {
-		      $('#show-previous-image, #show-next-image')
-		        .show();
-		      if (counter_max === counter_current) {
-		        $('#show-next-image')
-		          .hide();
-		      } else if (counter_current === 1) {
-		        $('#show-previous-image')
-		          .hide();
-		      }
-		    }
-
-		    /**
-		     *
-		     * @param setIDs        Sets IDs when DOM is loaded. If using a PHP counter, set to false.
-		     * @param setClickAttr  Sets the attribute for the click handler.
-		     */
-
-		    function loadGallery(setIDs, setClickAttr) {
-		      let current_image,
-		        selector,
-		        counter = 0;
-
-		      $('#show-next-image, #show-previous-image')
-		        .click(function () {
-		          if ($(this)
-		            .attr('id') === 'show-previous-image') {
-		            current_image--;
-		          } else {
-		            current_image++;
-		          }
-
-		          selector = $('[data-image-id="' + current_image + '"]');
-		          updateGallery(selector);
-		        });
-
-		      function updateGallery(selector) {
-		        let $sel = selector;
-		        current_image = $sel.data('image-id');
-		        $('#image-gallery-title')
-		          .text($sel.data('title'));
-		        $('#image-gallery-image')
-		          .attr('src', $sel.data('image'));
-		        disableButtons(counter, $sel.data('image-id'));
-		      }
-
-		      if (setIDs == true) {
-		        $('[data-image-id]')
-		          .each(function () {
-		            counter++;
-		            $(this)
-		              .attr('data-image-id', counter);
-		          });
-		      }
-		      $(setClickAttr)
-		        .on('click', function () {
-		          updateGallery($(this));
-		        });
-		    }
-		  });
-
-		// build key actions
-		$(document)
-		  .keydown(function (e) {
-		    switch (e.which) {
-		      case 37: // left
-		        if ((modalId.data('bs.modal') || {})._isShown && $('#show-previous-image').is(":visible")) {
-		          $('#show-previous-image')
-		            .click();
-		        }
-		        break;
-
-		      case 39: // right
-		        if ((modalId.data('bs.modal') || {})._isShown && $('#show-next-image').is(":visible")) {
-		          $('#show-next-image')
-		            .click();
-		        }
-		        break;
-
-		      default:
-		        return; // exit this handler for other keys
-		    }
-		    e.preventDefault(); // prevent the default action (scroll / move caret)
-		  });
-	</script>
 	<?php require_once 'includes/footer.php'; ?>
 </body>
 </html>	

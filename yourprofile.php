@@ -1,4 +1,6 @@
-<?php require_once 'php/core.php'; ?>
+<?php 
+require_once 'php/core.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +25,11 @@
 	</style>
 </head>
 <body>
+	<?php  
+	// $uniqueStr = sha1(md5(rand(1,9999999)));
+	// echo $uniqueStr;
+	?>
+	<?php $userInfoArray = $userObj->getUserByID($_SESSION['user_id']); ?>
 	<?php require_once 'includes/navbar.php'; ?>
 	<div class="container-fluid">
 		<div class="row">
@@ -33,11 +40,15 @@
 					</div>
 					<div class="card-body">
 						<div class="row">
-							<div class="col-md-5">
+							<div class="col-md-5 userInfoCard">
 								<img src="https://plus.unsplash.com/premium_photo-1666299357356-db1ed4a6d50b?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="..." class=" img-thumbnail">
 								<hr>
-								<h1>Ivan Duane</h1>
-								<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit, molestias, magni autem placeat quod quo? Officiis, quisquam, eius a quam fugiat voluptates, ipsum maxime recusandae alias temporibus perspiciatis sit quasi?</p>
+								<h1>
+									<?php echo $userInfoArray['first_name'] . " " . $userInfoArray['last_name']; ?>		
+								</h1>
+								<p>
+									<?php echo $userInfoArray['description']; ?>
+								</p>
 							</div>
 							<div class="col-md-7">
 
@@ -109,7 +120,7 @@
 								<h1>Add/Edit Photos</h1>
 							</div>						
 							<div class="col-md-1">
-								<button class="btn btn-primary">Add Photo</button>
+								<button class="btn btn-primary" data-toggle="modal" data-target="#uploadImageModal">Add Image</button>
 							</div>	
 						</div>
 					</div>
@@ -117,113 +128,18 @@
 						<div class="container">
 							<div class="row">
 								<div class="row">
-						            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-						                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
-						                   data-image="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                   data-target="#image-gallery">
-						                    <img class="img-thumbnail"
-						                         src="https://images.unsplash.com/photo-1725610588150-c4cd8b88affd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-						                         alt="Another alt text">
-						                </a>
-						            </div>
-						            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-						                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
-						                   data-image="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                   data-target="#image-gallery">
-						                    <img class="img-thumbnail"
-						                         src="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                         alt="Another alt text">
-						                </a>
-						            </div>
+									<?php $getAllImagesByUserID = $photoObj->getAllImagesByUserID($_SESSION['user_id']); ?>
 
+									<?php foreach ($getAllImagesByUserID as $row) { ?>
 						            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-						                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
-						                   data-image="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                   data-target="#image-gallery">
-						                    <img class="img-thumbnail"
-						                         src="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                         alt="Another alt text">
+						                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-image="images/<?php echo $row['photo_name']; ?>" data-target="#image-gallery">
+					                    <img class="img-thumbnail"
+					                         src="images/<?php echo $row['photo_name']; ?>"
+					                         alt="Another alt text">
 						                </a>
 						            </div>
-						            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-						                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Test1"
-						                   data-image="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                   data-target="#image-gallery">
-						                    <img class="img-thumbnail"
-						                         src="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                         alt="Another alt text">
-						                </a>
-						            </div>
-						            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-						                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice"
-						                   data-image="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                   data-target="#image-gallery">
-						                    <img class="img-thumbnail"
-						                         src="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                         alt="Another alt text">
-						                </a>
-						            </div>
-
-						            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-						                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice"
-						                   data-image="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                   data-target="#image-gallery">
-						                    <img class="img-thumbnail"
-						                         src="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                         alt="Another alt text">
-						                </a>
-						            </div>
-						            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-						                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice"
-						                   data-image="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                   data-target="#image-gallery">
-						                    <img class="img-thumbnail"
-						                         src="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                         alt="Another alt text">
-						                </a>
-						            </div>
-						            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-						                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice"
-						                   data-image="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                   data-target="#image-gallery">
-						                    <img class="img-thumbnail"
-						                         src="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                         alt="Another alt text">
-						                </a>
-						            </div>
-
-
-
-						            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-						                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice"
-						                   data-image="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                   data-target="#image-gallery">
-						                    <img class="img-thumbnail"
-						                         src="https://images.pexels.com/photos/305070/pexels-photo-305070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                         alt="Another alt text">
-						                </a>
-						            </div>
-						            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-						                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice"
-						                   data-image="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                   data-target="#image-gallery">
-						                    <img class="img-thumbnail"
-						                         src="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                         alt="Another alt text">
-						                </a>
-						            </div>
-						            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-						                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice"
-						                   data-image="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                   data-target="#image-gallery">
-						                    <img class="img-thumbnail"
-						                         src="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						                         alt="Another alt text">
-						                </a>
-						            </div>
+						        	<?php } ?>
 						        </div>
-
-
 						        <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						            <div class="modal-dialog modal-lg">
 						                <div class="modal-content">
@@ -300,14 +216,37 @@
 	  </div>
 	</div>
 
+	<!-- Modal -->
+	<div class="modal fade" id="uploadImageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Add Image</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<form action="php/photos.php" method="POST" enctype="multipart/form-data">
+		      	<div class="form-group">
+				    <input type="file" class="form-control-file imageFile" id="exampleFormControlFile1" name="imageFile">
+				</div>
+				<div class="form-group">
+				    <input type="submit" class="btn btn-primary float-right" id="exampleFormControlFile1" name="addPhotoBtn">
+				</div>
+			</form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+
 	<script>
 		$(document).ready(function () {
-			$('.updateUserBtn').on('click', function () {
+			$('.firstName, .lastName, .location, .descriptionInput').on('input', function (e) {
 				var firstName = $('.firstName').val();
 				var lastName = $('.lastName').val();
-				var age = $('.age').val();
-				var descriptionInput = $('.descriptionInput').text();
-
+				var location = $('.location').val();
 				$.ajax({
 					url: "php/users.php",
 					type: "POST",
@@ -316,14 +255,14 @@
 						saveUpdatedUserBtn:1,
 						firstName:firstName,
 						lastName:lastName,
-						age:age,
-						descriptionInput:descriptionInput
+						location:location
 					},
 					success: function (data) {
-						alert(data);
+						console.log(data);
 					}
 				});
 			});
+
 		})
 	</script>
 	<?php require_once 'includes/footer.php'; ?>
